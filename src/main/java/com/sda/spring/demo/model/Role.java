@@ -4,21 +4,16 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "roles")
+public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Book> books;
-
-    public Category(String name){
-        this.name = name;
-    }
-
-    public Category(){}
+    @OneToMany(mappedBy = "role")
+    private Set<User> users;
 
     public Long getId() {
         return id;
@@ -36,11 +31,13 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Book> giveBooks() {
-        return books;
+    public Set<User> giveUsers() {
+        return users;
     }
 
-    public void setBooks(Set<Book> books) {
-        this.books = books;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }
+
+

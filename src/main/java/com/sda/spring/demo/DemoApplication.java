@@ -9,6 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner{
 
@@ -21,16 +24,24 @@ public class DemoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... arg) throws Exception {
-		Author author = new Author("Jan", "Kowalski");
+/*
+		Set<Author> authors = new HashSet<Author>();
+		authors.add(new Author("Jan", "Kowalski"));
+		authors.add(new Author("Zbigniew", "Nowak"));
 		Category category = new Category("Lektury szkolne");
 
-		Book book = new Book("Przygoda", author, category);
+		Book book = new Book("Przygoda", "987-123-123-1", authors, category);
 		bookRespository.save(book);
 
-		author = new Author("Adam", "Mickiewicz");
-		category = new Category("Lektury szkolne");
+		authors.clear();
+		authors.add(new Author("Adam", "Mickiewicz"));
+*/
 
-		book = new Book("Pan Tadeusz", author, category);
+/*
+		//category = new Category("Lektury szkolne");
+
+		book = new Book("Pan Tadeusz", "987-123-546-1", authors, category);
 		bookRespository.save(book);
+*/
 	}
 }

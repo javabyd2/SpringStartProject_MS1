@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -12,30 +13,29 @@ import javax.persistence.*;
 @Table(name = "books")
 public class Book {
 
-    /*
-    * Book (id, name, isbn, id_author, ic_category)
-    * Author (id, name, lastname)
-    * Category (id, name)
-    * */
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String title;
+    private String isbn;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
-//    private String author;
-
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+//    @ManyToOne(cascade = CascadeType.REMOVE) //MERGE, ALL(?), DETACH, PERSIST(?), REFRESH
     private Category category;
 
-    public Book(String title, Author author, Category category) {
+    @ManyToMany(cascade = CascadeType.ALL)
+//    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(joinColumns =
+    @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "author_id",
+                    referencedColumnName = "id"))
+    private Set<Author> authors;
+
+    public Book(String title, String isbn, Set<Author> authors, Category category) {
         this.title = title;
-        this.author = author;
+        this.isbn = isbn;
+        this.authors = authors;
         this.category = category;
     }
 
