@@ -32,11 +32,15 @@ public class Book {
                     referencedColumnName = "id"))
     private Set<Author> authors;
 
-    public Book(String title, String isbn, Set<Author> authors, Category category) {
+    @ManyToOne
+    private Publisher publisher;
+
+    public Book(String title, String isbn, Set<Author> authors, Category category, Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
         this.authors = authors;
         this.category = category;
+        this.publisher = publisher;
     }
 
     public Book(){}
